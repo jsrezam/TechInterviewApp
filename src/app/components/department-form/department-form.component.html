@@ -1,0 +1,55 @@
+<h2 *ngIf="this.department.id" class="mb-3">Edit Department</h2>
+<h2 *ngIf="!this.department.id" class="mb-3">New Department</h2>
+
+<form #form="ngForm" (ngSubmit)="createDepartment(form)" class="needs-validation"
+  [ngClass]="{'was-validated': form.submitted}" novalidate>
+  <div class="mb-3" *ngIf="this.enterprises">
+    <label for="enterprise" class="form-label">Enterprise</label>
+    <select id="enterprise" class="form-control" required name="enterprise" [(ngModel)]="this.department.enterpriseId">
+      <option value=""></option>
+      <option *ngFor="let e of this.enterprises" value="{{e.id}}">{{e.name}}</option>
+    </select>
+    <div class="invalid-feedback">Valid enterprise is required.</div>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Department Name</label>
+    <input type="text" class="form-control" id="name" required name="name" value [(ngModel)]="this.department.name">
+    <div class="invalid-feedback">Valid name is required.</div>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description" required name="description"
+      [(ngModel)]="this.department.description">
+    <div class="invalid-feedback">Valid description is required.</div>
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">Department Phone</label>
+    <input type="number" class="form-control" id="phone" required name="phone" [(ngModel)]="this.department.phone">
+    <div class="invalid-feedback">Valid phone is required.</div>
+  </div>
+  <div *ngIf="!this.department.id" class="mb-3">
+    <label for="createdby" class="form-label">Created by</label>
+    <input type="text" class="form-control" id="createdby" required name="createdby"
+      [(ngModel)]="this.department.createdBy">
+    <div class="invalid-feedback">Valid created by is required.</div>
+  </div>
+  <div *ngIf="this.department.id" class="mb-3">
+    <label for="modifiedBy" class="form-label">Modified by</label>
+    <input type="text" class="form-control" id="modifiedBy" required name="modifiedBy"
+      [(ngModel)]="this.department.modifiedBy">
+    <div class="invalid-feedback">Valid modified by is required.</div>
+  </div>
+  <div *ngIf="this.department.id" class="row">
+    <div class="col-md-2 mb-3">
+      <p>Is Active?</p>
+      <label for="isActive" class="form-check-inline">
+        <input type="radio" name="state" id="isActive" [value]="true" [(ngModel)]="this.department.status"> Yes
+      </label>
+      <label for="isInactive" class="form-check-inline">
+        <input type="radio" name="state" id="isInactive" [value]="false" [(ngModel)]="this.department.status">
+        No
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

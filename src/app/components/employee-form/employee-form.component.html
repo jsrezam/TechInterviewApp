@@ -1,0 +1,87 @@
+<h2 *ngIf="this.employee.id" class="mb-3">Edit Employee</h2>
+<h2 *ngIf="!this.employee.id" class="mb-3">New Employee</h2>
+
+<form #form="ngForm" (ngSubmit)="createEmployee(form)" class="needs-validation"
+  [ngClass]="{'was-validated': form.submitted}" novalidate>
+  <div class="mb-3" *ngIf="this.enterprises">
+    <label for="enterprise" class="form-label">Enterprise</label>
+    <select id="enterprise" class="form-control" required name="enterpriseId" (change)="onEnterpriceChange()"
+      [(ngModel)]="this.employee.enterpriseId">
+      <option value=""></option>
+      <option *ngFor="let e of this.enterprises" value="{{e.id}}">{{e.name}}</option>
+    </select>
+    <div class="invalid-feedback">Valid enterprise is required.</div>
+  </div>
+  <div class="mb-3">
+    <h2>Departments</h2>
+    <div *ngFor="let d of departments" class="checkbox">
+      <label for="department{{d.id}}">
+        <input type="checkbox" id="department{{d.id}}" (change)="onDepartmentToggle(d.id,$event)"
+          [checked]="this.employee.departments.includes(d.id)"> {{d.name}}
+      </label>
+    </div>
+  </div>
+  <div class="row g-3">
+    <div class="col-sm-6">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" required name="name" value [(ngModel)]="this.employee.name">
+      <div class="invalid-feedback">Valid name is required.</div>
+    </div>
+    <div class="col-sm-6">
+      <label for="surname" class="form-label">Surname</label>
+      <input type="text" class="form-control" id="surname" required name="surname" [(ngModel)]="this.employee.surname">
+      <div class="invalid-feedback">Valid surname is required.</div>
+    </div>
+  </div>
+  <div class="row g-3">
+    <div class="col-sm-6">
+      <label for="position" class="form-label">Position</label>
+      <input type="text" class="form-control" id="position" required name="position"
+        [(ngModel)]="this.employee.position">
+      <div class="invalid-feedback">Valid position is required.</div>
+    </div>
+    <div class="col-sm-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" required name="email" [(ngModel)]="this.employee.email">
+      <div class="invalid-feedback">Valid email is required.</div>
+    </div>
+  </div>
+  <div class="row g-3">
+    <div class="col-sm-6">
+      <label for="age" class="form-label">Age</label>
+      <input type="text" class="form-control" id="age" required name="age" [(ngModel)]="this.employee.age"
+        disabled="true">
+    </div>
+    <div class="col-sm-6">
+      <label for="birthdate" class="form-label">Birthdate</label>
+      <input type="text" class="form-control" placeholder="yyyy-MM-dd - example: 1990-03-23" id="birthdate" required
+        name="birthdate" [(ngModel)]="this.employee.birthdate">
+      <div class="invalid-feedback">Valid birthdate is required.</div>
+    </div>
+  </div>
+  <div *ngIf="!this.employee.id" class="mb-3">
+    <label for="createdby" class="form-label">Created by</label>
+    <input type="text" class="form-control" id="createdby" required name="createdby"
+      [(ngModel)]="this.employee.createdBy">
+    <div class="invalid-feedback">Valid created by is required.</div>
+  </div>
+  <div *ngIf="this.employee.id" class="mb-3">
+    <label for="modifiedBy" class="form-label">Modified by</label>
+    <input type="text" class="form-control" id="modifiedBy" required name="modifiedBy"
+      [(ngModel)]="this.employee.modifiedBy">
+    <div class="invalid-feedback">Valid modified by is required.</div>
+  </div>
+  <div *ngIf="this.employee.id" class="row">
+    <div class="col-md-2 mb-3">
+      <p>Is Active?</p>
+      <label for="isActive" class="form-check-inline">
+        <input type="radio" name="state" id="isActive" [value]="true" [(ngModel)]="this.employee.status"> Yes
+      </label>
+      <label for="isInactive" class="form-check-inline">
+        <input type="radio" name="state" id="isInactive" [value]="false" [(ngModel)]="this.employee.status">
+        No
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

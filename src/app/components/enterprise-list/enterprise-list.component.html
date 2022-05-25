@@ -1,0 +1,55 @@
+<h2 class="mb-3">
+  Enterprises
+</h2>
+
+<hr class="my-4">
+
+<p>
+  <a [routerLink]="['/enterprises/new']" class="btn btn-primary">
+    <fa-icon [icon]="['fas','plus']"></fa-icon> Add Enterprise
+  </a>
+</p>
+
+<table class="table table-striped" aria-describedby="customer-table">
+  <thead>
+    <tr>
+      <th *ngFor="let column of this.columns" scope="col" aria-labelledby="tableLabel" class="text-center">
+        <div>{{column}}</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let enterprise of enterprises">
+      <td class="text-center">{{ enterprise.name }}</td>
+      <td class="text-center">{{ enterprise.address }}</td>
+      <td class="text-center">{{ enterprise.phone }}</td>
+      <td class="text-center">{{ enterprise.createdDate | date: 'dd/MM/yyyy' }}</td>
+      <td class="text-center">{{ enterprise.createdBy }}</td>
+      <td class="text-center">
+        <div *ngIf="!enterprise.modifiedDate">
+          Not available
+        </div>
+        <div *ngIf="enterprise.modifiedDate">
+          {{ enterprise.modifiedDate | date: 'dd/MM/yyyy' }}
+        </div>
+      </td>
+      <td class="text-center">
+        <div *ngIf="enterprise.modifiedBy">
+          {{ enterprise.modifiedBy }}
+        </div>
+        <div *ngIf="!enterprise.modifiedBy">
+          Not available
+        </div>
+      </td>
+      <td class="text-center">
+        <fa-icon *ngIf="enterprise.status" [icon]="this.faArrowUp"></fa-icon>
+        <fa-icon *ngIf="!enterprise.status" [icon]="this.faArrowDown">Down</fa-icon>
+      </td>
+      <td class="text-center">
+        <a class="nav-link text-dark" [routerLink]="['/enterprises/edit/', enterprise.id]">
+          <fa-icon [icon]="['fas','pen-to-square']"></fa-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

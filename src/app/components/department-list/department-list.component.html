@@ -1,0 +1,56 @@
+<h2 class="mb-3">
+  Departments
+</h2>
+
+<hr class="my-4">
+
+<p>
+  <a [routerLink]="['/departments/new']" class="btn btn-primary">
+    <fa-icon [icon]="['fas','plus']"></fa-icon> Add Department
+  </a>
+</p>
+
+<table class="table table-striped" aria-describedby="customer-table">
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" scope="col" aria-labelledby="tableLabel" class="text-center">
+        <div>{{column}}</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let department of this.departments">
+      <td class="text-center">{{ department.enterprise.name }}</td>
+      <td class="text-center">{{ department.name }}</td>
+      <td class="text-center">{{ department.description }}</td>
+      <td class="text-center">{{ department.phone }}</td>
+      <td class="text-center">{{ department.createdDate | date: 'dd/MM/yyyy' }}</td>
+      <td class="text-center">{{ department.createdBy }}</td>
+      <td class="text-center">
+        <div *ngIf="!department.modifiedDate">
+          Not available
+        </div>
+        <div *ngIf="department.modifiedDate">
+          {{ department.modifiedDate | date: 'dd/MM/yyyy' }}
+        </div>
+      </td>
+      <td class="text-center">
+        <div *ngIf="department.modifiedBy">
+          {{ department.modifiedBy }}
+        </div>
+        <div *ngIf="!department.modifiedBy">
+          Not available
+        </div>
+      </td>
+      <td class="text-center">
+        <fa-icon *ngIf="department.status" [icon]="this.faArrowUp"></fa-icon>
+        <fa-icon *ngIf="!department.status" [icon]="this.faArrowDown">Down</fa-icon>
+      </td>
+      <td class="text-center">
+        <a class="nav-link text-dark" [routerLink]="['/departments/edit/', department.id]">
+          <fa-icon [icon]="['fas','pen-to-square']"></fa-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

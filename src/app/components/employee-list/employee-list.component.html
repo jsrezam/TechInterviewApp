@@ -1,0 +1,56 @@
+<h2 class="mb-3">
+  Employees
+</h2>
+
+<hr class="my-4">
+
+<p>
+  <a [routerLink]="['/employees/new']" class="btn btn-primary">
+    <fa-icon [icon]="['fas','plus']"></fa-icon> Add Employee
+  </a>
+</p>
+
+<table class="table table-striped" aria-describedby="customer-table">
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" scope="col" aria-labelledby="tableLabel" class="text-center">
+        <div>{{column}}</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of this.employees">
+      <td class="text-center">{{ employee.name +' '+ employee.surname }}</td>
+      <td class="text-center">{{ employee.position }}</td>
+      <td class="text-center">{{ employee.email }}</td>
+      <td class="text-center">{{ employee.age }}</td>
+      <td class="text-center">{{ employee.createdDate | date: 'dd/MM/yyyy' }}</td>
+      <td class="text-center">{{ employee.createdBy }}</td>
+      <td class="text-center">
+        <div *ngIf="!employee.modifiedDate">
+          Not available
+        </div>
+        <div *ngIf="employee.modifiedDate">
+          {{ employee.modifiedDate | date: 'dd/MM/yyyy' }}
+        </div>
+      </td>
+      <td class="text-center">
+        <div *ngIf="employee.modifiedBy">
+          {{ employee.modifiedBy }}
+        </div>
+        <div *ngIf="!employee.modifiedBy">
+          Not available
+        </div>
+      </td>
+      <td class="text-center">
+        <fa-icon *ngIf="employee.status" [icon]="this.faArrowUp"></fa-icon>
+        <fa-icon *ngIf="!employee.status" [icon]="this.faArrowDown">Down</fa-icon>
+      </td>
+      <td class="text-center">
+        <a class="nav-link text-dark" [routerLink]="['/employees/edit/', employee.id]">
+          <fa-icon [icon]="['fas','pen-to-square']"></fa-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

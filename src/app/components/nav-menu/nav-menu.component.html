@@ -1,0 +1,42 @@
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">TechInterviewApp</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/enterprises']">
+              <fa-icon [icon]="['fas','building']"></fa-icon> Enterprises
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/departments']">
+              <fa-icon [icon]="this.faCodeBranch"></fa-icon> Departments
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/employees']">
+              <fa-icon [icon]="['fas','users']"></fa-icon> Employees
+            </a>
+          </li>
+
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Administration</a>
+            <div class=" dropdown dropdown-menu">
+              <a class="dropdown-item menu-item" [routerLink]="['/products']">Products</a>
+              <a class="dropdown-item menu-item" [routerLink]="['/campaigns']">Campaigns</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item menu-item" [routerLink]="['/users']">Users</a>
+              <a class="dropdown-item menu-item" [routerLink]="['/dashboard']">Dashboard</a>
+            </div>            
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
